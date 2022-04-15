@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transitions    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            transition: 350ms;
+        }
+        .box{
+            height: 100vh;
+            width: 70px;
+            background-color: blueviolet;
+            transition: 350ms;
+            position: fixed;
+        }
+        #toggleBtn{
+            background-color: inherit;
+            height: 40px;
+            width: 50px;
+            border: 2px  white solid;
+            border-radius: 7px;
+            font-size: 30px;
+            margin: 10px;
+        }
+        .icons{
+            height: 30px;
+            float: left;
+            margin: 3px;
+        }
+        .sideBarTitles{
+            height: 35px;
+            min-width: 35px;
+            border: solid white 2px;
+            border-radius: 18.5px;
+            margin: 30px 15px;
+            cursor: pointer;
+        }
+        .sideBarTitles:hover{
+            background-color: cornflowerblue;
+        }
+        .iconText{
+            color: white;
+            margin: 15px; 
+            font-size: 22px;
+            display: none;
+            font-weight: 700;
+        }
+        #Mode{
+            background-color: white;
+            color: black;
+        }
+        #Mode:hover{
+            box-shadow: 0 0 10px white;
+        }
+        #modeText{
+            color: black;
+        }
+        main{
+            display: flex;
+            flex-direction: row;
+        }
+        .content{
+            flex-basis: 100%;
+        }
+        .content>nav{
+            height: 70px;
+            background-color: rgb(183, 96, 183);
+            font-size: 22px;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* .box:hover{
+            width: 500px;
+        } */
+    </style>
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    <main>
+
+    
+    <div class="box" id="sidebar">
+        <button id="toggleBtn" style="color: white;">=</button>
+        <span class="iconText" >MySite</span>
+        <br>
+        <div class="sideBarTitles" id="Home">
+            <img src="images/home_white_24dp.svg" class="icons" alt="">
+            <span  class="iconText">Home</span>
+        </div>
+        <div class="sideBarTitles" id="Settings">
+            <img src="images/settings_white_24dp.svg" class="icons" alt="">
+            <span  class="iconText">Settings</span>
+        </div>
+        <div class="sideBarTitles" id="Favourites">
+            <img src="images/favorite_white_24dp.svg" class="icons" alt="">
+            <span  class="iconText">Favourites</span>
+        </div>
+        <div class="sideBarTitles" id="Mode">
+            <img src="images/light_mode_black_24dp.svg" class="icons" alt="">
+            <span  class="iconText" id="modeText">Light</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <nav>Welcome To MySite</nav>
+    </div>
+</main>
+</body>
+<script>
+    let  toggleBtn = document.getElementById("toggleBtn");
+    let box = document.getElementById("sidebar");
+    let txt = document.getElementsByClassName("iconText");
+    let mode = document.getElementById("Mode");
+        
+    toggleBtn.addEventListener('click',function(){
+    
+        let width = box.style.width;
+        let display;
+        let delay;
+        if(width == "350px"){
+            width = "70px";
+            display = "none";
+            delay = 50;
+            
+        }
+        else{
+            width = "350px";
+            display = "inline";
+            delay = 200;
+        
+        }
+        box.style.width = width;
+        
+        
+        // if()
+        setTimeout(function(){
+            for(let i=0;i<txt.length;i++){
+                txt[i].style.display = display;
+            }
+        },delay);
+    });
+    mode.addEventListener('click',function(){
+        let m = mode.children[1].innerHTML;
+        let src;
+        let bg;
+        if(m=="Light"){
+            m = "Dark";
+            src = "images/dark_mode_white_24dp.svg";
+            bg = "black";
+            mode.children[1].style.color = "white";
+            box.style.background = "mediumvioletred";
+            mode.children[0]
+        }
+        else{
+            m = "Light";
+            src = "images/light_mode_black_24dp.svg";
+            bg = "white";
+            mode.children[1].style.color = "black";
+            box.style.background = "blueviolet";
+        }
+        mode.children[0].src = src;
+        mode.style.backgroundColor = bg;
+        document.body.style.background = bg;
+        mode.children[1].innerHTML = m;
+    });
+</script>
+</html>
